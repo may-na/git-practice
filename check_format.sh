@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# Путь к файлу
-file="./example.txt"
+# Путь к каталогу репозитория
+repo_directory=$(git rev-parse --show-toplevel)
 
 # Формат, который мы ожидаем
-expected_format=""
+expected_format="^#.*"
 
-# Проверка, содержит ли файл ожидаемый формат
-if grep -Eq "^#.*" "$file"; then
-    echo "Формат файла $file соответствует требованиям."
-    exit 0
-else
-    echo "Ошибка: Формат файла $file не соответствует требованиям."
-    exit 1
-fi
+# Проверка формата для всех .txt файлов в репозитории
+for file in $(find "$repo_directory" -name "*.txt"); do
+    if grep -Eq "$expected_format" "$file"; then
+        echo "Формат файла $file соответствует требованиям."
+    else
+        echo "Ошибка: Формат файла $file не соответствует требованиям."
+        exit 1
+    fi
+done
+
+# Все файлы проверены успешно
+exit 0
