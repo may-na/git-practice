@@ -44,3 +44,4 @@
 
 Работа с __GitFlow__:
 ![Скриншот работы с git flow](assets/20.png)
+![Скриншот работы с git flow2](assets/21.png)
